@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext, DndProvider} from 'react-dnd';
+import { DragDropContext } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
 
 /**
@@ -94,7 +93,6 @@ class Puzzle extends React.Component {
     const { size } = this.props;
 
     return (
-      <DndProvider backend={TouchBackend} options={{ enableTouchEvents: true, enableMouseEvents: true, }}>
         <div
           style={{
             display: 'flex',
@@ -105,7 +103,6 @@ class Puzzle extends React.Component {
           }}>
           {this.renderSquares()}
         </div>
-      </DndProvider>
     );
   }
 };
@@ -123,4 +120,4 @@ Puzzle.defaultProps = {
   onDone: () => {},
 };
 
-export default DragDropContext(HTML5Backend)(Puzzle);
+export default DragDropContext(TouchBackend)(Puzzle);
