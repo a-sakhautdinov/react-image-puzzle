@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Cell from './Cell';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContext } from 'react-dnd';
+import { DragDropContext, DndProvider} from 'react-dnd';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 /**
  * Shuffles the passed array and returns a new one
@@ -93,16 +94,18 @@ class Puzzle extends React.Component {
     const { size } = this.props;
 
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          padding: 0,
-          width: `${size}px`,
-          height: `${size}px`
-        }}>
-        {this.renderSquares()}
-      </div>
+      <DndProvider backend={TouchBackend} options={{ enableTouchEvents: true, enableMouseEvents: true, }}>
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            padding: 0,
+            width: `${size}px`,
+            height: `${size}px`
+          }}>
+          {this.renderSquares()}
+        </div>
+      </DndProvider>
     );
   }
 };
